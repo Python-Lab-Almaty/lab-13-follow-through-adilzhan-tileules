@@ -144,7 +144,7 @@ hero.shape("circle")
 hero.color("red")
 hero.penup()
 hero.goto(start)
-hero.shapesize(2, 2)
+hero.shapesize(1, 5)
 
 # ----------------------------
 # 🟢 ПРЕПЯТСТВИЯ
