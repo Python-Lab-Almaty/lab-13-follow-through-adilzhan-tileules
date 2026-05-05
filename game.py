@@ -141,7 +141,7 @@ screen.tracer(0)
 # ----------------------------
 hero = turtle.Turtle()
 hero.shape("circle")
-hero.color("red")
+hero.color("blue")
 hero.penup()
 hero.goto(start)
 hero.shapesize(1, 5)
