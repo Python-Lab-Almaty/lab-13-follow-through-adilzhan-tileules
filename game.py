@@ -160,6 +160,12 @@ dynamic_obstacles = []
 # ----------------------------
 steps = 0
 penalties = 0
+# ---
+# СЧЁТ И ТАЙМЕР
+# ---
+steps = 0
+penalties = 0
+start_game_time = time.time()  # ← ДОБАВИТЬ ЭТУ СТРОКУ
 
 # ----------------------------
 # 🟢 СКОРОСТЬ
@@ -293,6 +299,20 @@ def draw_all():
     draw_all.lives_drawer.clear()
     draw_all.lives_drawer.goto(-WIDTH//2 + 80, HEIGHT//2 - 40)
     draw_all.lives_drawer.write(f"❤️ Жизни: {lives}", font=("Arial", 20, "bold"))
+    # Отображение таймера (добавить в draw_all)
+    if not hasattr(draw_all, 'timer_drawer'):
+        draw_all.timer_drawer = turtle.Turtle()
+        draw_all.timer_drawer.hideturtle()
+        draw_all.timer_drawer.penup()
+        draw_all.timer_drawer.color("cyan")
+    
+    elapsed = time.time() - start_game_time
+    minutes = int(elapsed // 60)
+    seconds = int(elapsed % 60)
+    draw_all.timer_drawer.clear()
+    draw_all.timer_drawer.goto(WIDTH//2 - 100, HEIGHT//2 - 40)
+    draw_all.timer_drawer.write(f"⏱️ {minutes:02d}:{seconds:02d}", 
+                                 font=("Arial", 18, "bold"))
     
     screen.update()
 
