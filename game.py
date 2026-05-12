@@ -166,6 +166,12 @@ penalties = 0
 # ----------------------------
 vx = 5
 vy = 5
+# ---
+# УСКОРЕНИЕ (BOOST)
+# ---
+boost_active = False
+normal_vx = vx
+normal_vy = vy
 
 # ----------------------------
 # 🟢 РЕЖИМ
@@ -370,6 +376,24 @@ def right():
         "y": hero.ycor(),
         "time": time.time()
     })
+    # ---
+# ФУНКЦИИ УСКОРЕНИЯ (BOOST)
+# ---
+def start_boost():
+    global vx, vy, boost_active, normal_vx, normal_vy
+    if not boost_active:
+        normal_vx, normal_vy = vx, vy
+        vx = vx * 2
+        vy = vy * 2
+        boost_active = True
+        print("⚡ УСКОРЕНИЕ ВКЛЮЧЕНО!")
+
+def stop_boost():
+    global vx, vy, boost_active
+    if boost_active:
+        vx, vy = normal_vx, normal_vy
+        boost_active = False
+        print("🐢 УСКОРЕНИЕ ВЫКЛЮЧЕНО")
 
 def reset_session():
     clear_session(student_name)
@@ -385,6 +409,11 @@ screen.onkey(down, "s")
 screen.onkey(left, "a")
 screen.onkey(right, "d")
 screen.onkey(reset_session, "r")
+# Ускорение по Shift
+screen.onkeypress(start_boost, "Shift_L")
+screen.onkeypress(start_boost, "Shift_R")
+screen.onkeyrelease(stop_boost, "Shift_L")
+screen.onkeyrelease(stop_boost, "Shift_R")
 
 # ----------------------------
 # 🟢 ОСНОВНОЙ ЦИКЛ
