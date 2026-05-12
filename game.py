@@ -8,7 +8,11 @@ import json
 # ----------------------------
 # 🟢 КОНСТАНТЫ
 # ----------------------------
-WIDTH, HEIGHT = 1200, 800
+WIDTH, HEIGHT = 1400, 900
+# ---
+# ПЕРЕМЕННЫЕ ИГРЫ
+# ---
+lives = 3
 
 # 🟢 ИНИЦИАЛИЗАЦИЯ ЛОГА
 log = []
@@ -273,6 +277,16 @@ def draw_all():
     score_drawer.clear()
     score_drawer.write(f"Steps: {steps} | Penalties: {penalties} | Score: {score}",
                        align="center", font=("Arial", 16, "bold"))
+                       # Отображение жизней
+    if not hasattr(draw_all, 'lives_drawer'):
+        draw_all.lives_drawer = turtle.Turtle()
+        draw_all.lives_drawer.hideturtle()
+        draw_all.lives_drawer.penup()
+        draw_all.lives_drawer.color("white")
+    
+    draw_all.lives_drawer.clear()
+    draw_all.lives_drawer.goto(-WIDTH//2 + 80, HEIGHT//2 - 40)
+    draw_all.lives_drawer.write(f"❤️ Жизни: {lives}", font=("Arial", 20, "bold"))
     
     screen.update()
 
@@ -421,6 +435,7 @@ while True:
         print("🎯 Reached B! RETURN TO A!")
         print(f"🟢 Теперь будут появляться препятствия!")
         going_forward = False
+        hero.color("yellow")
         
         
         log.append({
